@@ -10,7 +10,7 @@ import com.app.dca.exception.UnknownDeveloperException;
 import com.app.dca.exception.UnknownFeedException;
 
 @Repository
-public interface IFeedRepository extends JpaRepository<Feed, Integer>,CustomFeedRepository{
+public interface IFeedRepository{
 
 	Feed saveFeed(Feed feed);
 	

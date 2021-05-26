@@ -7,12 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.app.dca.entity.Developer;
 import com.app.dca.exception.UnknownDeveloperException;
+import com.app.dca.repository.DeveloperRepository;
 import com.app.dca.repository.IDeveloperRepository;
 
 @Service
 public class IDeveloperServiceImpl implements IDeveloperService{
 	@Autowired
-	private  IDeveloperRepository repo;
+	private DeveloperRepository repo;
 	
 	@Override
 	@Transactional
@@ -46,7 +47,6 @@ public class IDeveloperServiceImpl implements IDeveloperService{
 
 	@Override
 	public Developer statusUpdate(Developer dev) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

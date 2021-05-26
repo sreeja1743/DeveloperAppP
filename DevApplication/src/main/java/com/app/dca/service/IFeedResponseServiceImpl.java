@@ -12,13 +12,14 @@ import com.app.dca.entity.FeedResponse;
 import com.app.dca.exception.UnknownDeveloperException;
 import com.app.dca.exception.UnknownFeedException;
 import com.app.dca.exception.UnknownFeedResponseException;
+import com.app.dca.repository.FeedResponseRepository;
 import com.app.dca.repository.IFeedResponseRepository;
 
 @Service
 public class IFeedResponseServiceImpl implements IFeedResponseService {
 	
 	@Autowired
-	private IFeedResponseRepository repo;
+	private FeedResponseRepository repo;
 	
 	
 	@Override
@@ -69,13 +70,13 @@ public class IFeedResponseServiceImpl implements IFeedResponseService {
 	@Override
 	public List<FeedResponse> getResponseByFeed(int feedId) throws UnknownFeedException {
 
-		return repo.fetchResponseByFeed(feedId);
+		return repo.findAll();
 	}
 
 	@Override
 	public List<FeedResponse> getResponseByDeveloper(int devId) throws UnknownDeveloperException {
-
-		return repo.fetchResponseByDeveloper(devId);
+            
+		return null;
 	}
 
 

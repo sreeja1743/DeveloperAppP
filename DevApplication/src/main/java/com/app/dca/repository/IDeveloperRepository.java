@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.app.dca.entity.Developer;
 import com.app.dca.exception.UnknownDeveloperException;
 
-@Repository
-public interface IDeveloperRepository extends JpaRepository<Developer, Integer> {
+
+public interface IDeveloperRepository{
 
 	Developer saveDeveloper(Developer dev);
 	

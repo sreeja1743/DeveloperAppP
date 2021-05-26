@@ -22,13 +22,14 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.app.dca.entity.Feed;
 import com.app.dca.service.IFeedService;
+import com.app.dca.service.IFeedServiceImpl;
 import com.app.dca.exception.*;
 
 @RestController
 public class FeedRestController {
      
 	@Autowired
-	private IFeedService service;
+	private IFeedServiceImpl service;
 	
 	@PostMapping("/feed")
 	public Feed addFeed(@RequestBody Feed f) {

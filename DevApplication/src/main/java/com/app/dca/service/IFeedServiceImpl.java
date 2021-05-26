@@ -12,6 +12,7 @@ import com.app.dca.entity.Developer;
 import com.app.dca.entity.Feed;
 import com.app.dca.exception.UnknownDeveloperException;
 import com.app.dca.exception.UnknownFeedException;
+import com.app.dca.repository.FeedRepository;
 import com.app.dca.repository.IDeveloperRepository;
 import com.app.dca.repository.IFeedRepository;
 import com.app.dca.exception.UnknownFeedException;
@@ -20,7 +21,7 @@ import com.app.dca.exception.UnknownFeedException;
 public class IFeedServiceImpl implements IFeedService{
 
 	@Autowired
-	private IFeedRepository repo;
+	private FeedRepository repo;
 	
 	@Autowired
 	private IDeveloperService devServcie;
@@ -56,11 +57,14 @@ public class IFeedServiceImpl implements IFeedService{
 
 	@Override
 	public Feed removeFeed(int feedId) throws UnknownFeedException {
-		Feed f = repo.deleteFeed(feedId);
-		if(f == null){
+		Optional<Feed> f = repo.findById(feedId);
+		Feed del = repo.findById(feedId).get();
+		if(f.isEmpty()){
 			 throw new UnknownFeedException();
 			}
-		return repo.deleteFeed(feedId);
+		else
+			repo.deleteById(feedId);
+		return del;
 	}
 
 	@Override

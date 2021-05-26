@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.dca.entity.Developer;
 import com.app.dca.exception.UnknownDeveloperException;
 import com.app.dca.service.IDeveloperService;
+import com.app.dca.service.IDeveloperServiceImpl;
 
 @Validated
 @RestController
 @RequestMapping("/api")
 public class DeveloperRestController {
 	@Autowired
-	private IDeveloperService service;
+	private IDeveloperServiceImpl service;
 	
 	public DeveloperRestController() {
 		System.out.println(" ----->> Product Rest Controller Constructor ");

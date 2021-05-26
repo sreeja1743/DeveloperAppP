@@ -10,8 +10,8 @@ import com.app.dca.exception.UnknownDeveloperException;
 import com.app.dca.exception.UnknownFeedException;
 import com.app.dca.exception.UnknownFeedResponseException;
 
-@Repository
-public interface IFeedResponseRepository extends JpaRepository<FeedResponse, Integer> {
+
+public interface IFeedResponseRepository{
 	
 	FeedResponse saveResponse(FeedResponse resp);
 	

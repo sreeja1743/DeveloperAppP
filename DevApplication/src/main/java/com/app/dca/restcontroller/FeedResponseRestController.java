@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dca.entity.FeedResponse;
 import com.app.dca.service.IFeedResponseService;
+import com.app.dca.service.IFeedResponseServiceImpl;
 
 @Validated
 @RestController
@@ -20,17 +21,12 @@ import com.app.dca.service.IFeedResponseService;
 public class FeedResponseRestController {
 	
 	@Autowired
-	private IFeedResponseService service;
+    IFeedResponseServiceImpl service;
 	
 	public FeedResponseRestController() {
 		System.out.println("--------Response Rest Controller Constructor----------");
 	}
 	
-	@GetMapping("/home")
-	public String homeRequest()
-	{
-		return "Welcome :Developer Community App"+LocalDateTime.now();
-	}
 	
 	@PostMapping("/response")
 	public FeedResponse addResponse(@RequestBody  FeedResponse resp)
