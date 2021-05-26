@@ -4,15 +4,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
+@Table(name = "UserDeveloper")
 public class UserD {
 	@Id
-	@GeneratedValue
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@NotEmpty(message="Id cannot be left empty")
 	@Size(min=10,max=50,message="Invalid ID")
 	private String userId;

@@ -46,23 +46,23 @@ public class IFeedServiceImpl implements IFeedService{
 	}
 
 	@Override
-	public Feed getFeed(int feedId) throws UnknownFeedException{
+	public Feed getFeed(int feedId) {//throws UnknownFeedException{
 		Feed f = repo.findById(feedId).get();
-		if(f == null) {
+		/*if(repo.findById(feedId).isEmpty()) {
 		 throw new UnknownFeedException();
-		}
+		}*/
 
 		return repo.findById(feedId).get();
 	}
 
 	@Override
-	public Feed removeFeed(int feedId) throws UnknownFeedException {
+	public Feed removeFeed(int feedId) {//throws UnknownFeedException{
 		Optional<Feed> f = repo.findById(feedId);
 		Feed del = repo.findById(feedId).get();
-		if(f.isEmpty()){
+		/*if(f.isEmpty()){
 			 throw new UnknownFeedException();
 			}
-		else
+		else*/
 			repo.deleteById(feedId);
 		return del;
 	}

@@ -6,10 +6,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
@@ -21,7 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Developer{
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@NotEmpty(message = "Id cannot be left empty")
 	private int devId;
 	
@@ -37,6 +39,7 @@ public class Developer{
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotBlank(message = "Please provide a date.")
+	@Future
 	private LocalDate memberSince;
 	
 	

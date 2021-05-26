@@ -12,9 +12,9 @@ public interface IFeedService {
 	
 	Feed likeFeed(int feedId);
 	
-	Feed getFeed(int feedId) throws UnknownFeedException;
+	Feed getFeed(int feedId)throws UnknownFeedException;
 	
-	Feed removeFeed(int feedId) throws UnknownFeedException;
+	Feed removeFeed(int feedId)throws UnknownFeedException;
 	//jpql
 	List<Feed> getFeedsByDeveloper(int devId) throws UnknownDeveloperException;
 	

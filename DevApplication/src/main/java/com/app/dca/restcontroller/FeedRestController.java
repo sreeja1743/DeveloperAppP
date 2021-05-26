@@ -25,7 +25,9 @@ import com.app.dca.service.IFeedService;
 import com.app.dca.service.IFeedServiceImpl;
 import com.app.dca.exception.*;
 
+@Validated
 @RestController
+@RequestMapping("/api")
 public class FeedRestController {
      
 	@Autowired
@@ -42,7 +44,7 @@ public class FeedRestController {
 	}
 	
 	@GetMapping("/feedId/{id}")
-	public Feed getFeed(@PathVariable int id) throws UnknownFeedException {
+	public Feed getFeed(@PathVariable int id)throws UnknownFeedException{
 		return service.getFeed(id);
 	}
 	

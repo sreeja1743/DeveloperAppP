@@ -13,13 +13,19 @@ import com.app.dca.repository.UserRepository;
 public class IUserServiceImpl implements IUserService{
 	
 	@Autowired
-	private UserRepository repo;
+	private IUserRepository repu;
+	public IUserRepository getRepu() {
+		return repu;
+	}
+
+	public void setRepu(IUserRepository repu) {
+		this.repu = repu;
+	}
+
 	@Override
-	@Transactional
 	public UserD login(UserD user) {
 		// TODO Auto-generated method stub
-		repo.save(user);
-		return user;
+		return null;
 	}
 
 	@Override
@@ -28,11 +34,28 @@ public class IUserServiceImpl implements IUserService{
 		return null;
 	}
 
-	public UserRepository getRepo() {
-		return repo;
+	@Override
+	public UserD addUser(UserD u) {
+		// TODO Auto-generated method stub
+		return ;
 	}
 
-	public void setRepu(UserRepository repo) {
-		this.repo = repo;
+	@Override
+	public UserD editUser(UserD u) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public UserD getUser(int userid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserD removeUser(int userid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -16,7 +16,7 @@ import javax.persistence.OneToOne;
 public class FeedResponse {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int respId;
 	private String answer;
 	private LocalDate respDate;
