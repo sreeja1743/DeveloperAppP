@@ -20,6 +20,13 @@ public class CustomFeedRepositoryImpl implements CustomFeedRepository {
 		q.setParameter("feedTopic", feedTopic);
 		return q.getResultList();
 	}
+
+	@Override
+	public List<Feed> getFeedsByKeyWord(String keyword) {
+		Query q = entityManager.createQuery("from Feed where queryQ like :keyword");
+		q.setParameter("keyword", "%"+keyword+"%");
+		return q.getResultList();
+	}
 	
 
 }

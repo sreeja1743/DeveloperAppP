@@ -1,6 +1,7 @@
 package com.app.dca.exception;
 
 public class MyExceptionResponse {
+	
 	private int httpStatus;
 	private String exceptionMsg;
 	

@@ -2,8 +2,9 @@ package com.app.dca.entity;
 
 import java.time.LocalDate;
 import java.util.List;
-
+import java.util.Date;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -18,16 +21,18 @@ import javax.validation.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 public class Developer{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@NotEmpty(message = "Id cannot be left empty")
 	private int devId;
 	
 	@NotEmpty(message = "Name cannot be let blank or null")
+	@Column(name = "DevName")
 	private String name;
 	
 	
@@ -37,16 +42,14 @@ public class Developer{
 	@NotEmpty(message = "Skill level is mandatory and it should be Beginner, Intermediate or Expert")
 	private String skillLevel;	// Beginner/Intermediate/Expert
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotBlank(message = "Please provide a date.")
-	@Future
+   
 	private LocalDate memberSince;
 	
 	
-	@OneToMany(mappedBy = "dev")
+	@OneToMany(mappedBy = "dev", orphanRemoval = true)
 	private List<Feed> feeds;
 	
-   @OneToOne
+   @OneToOne(orphanRemoval = true)
    @JoinColumn(name = "userId", referencedColumnName = "userId")
    private UserD user;
 	
@@ -75,6 +78,14 @@ public class Developer{
 	}
 	
 	
+	
+	public Developer() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	public int getDevId() {
 		return devId;
 	}
@@ -183,7 +194,7 @@ public class Developer{
 			return false;
 		if (isVerified != other.isVerified)
 			return false;
-		if (memberSince == null) {
+	if (memberSince == null) {
 			if (other.memberSince != null)
 				return false;
 		} else if (!memberSince.equals(other.memberSince))
@@ -212,7 +223,7 @@ public class Developer{
 	@Override
 	public String toString() {
 		return "Developer [devId=" + devId + ", name=" + name + ", email=" + email + ", skillLevel=" + skillLevel
-				+ ", memberSince=" + memberSince + ", feeds=" + feeds + ", user=" + user + ", totalFeeds=" + totalFeeds
+				+", memberSince=" + memberSince +", feeds=" + feeds + ", user=" + user + ", totalFeeds=" + totalFeeds
 				+ ", reputation=" + reputation + ", isVerified=" + isVerified + ", isBlocked=" + isBlocked + "]";
 	}
 	

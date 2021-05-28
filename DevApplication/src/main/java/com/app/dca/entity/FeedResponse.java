@@ -12,18 +12,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class FeedResponse {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int respId;
+	
 	private String answer;
+	
+	
 	private LocalDate respDate;
+	
 	private LocalTime respTime;
 	private int accuracy;	// Likes on Response increase accuracy
 	
-	 @OneToOne
+	 @OneToOne(orphanRemoval = true)
 	 @JoinColumn(name = "devId", referencedColumnName = "devId")
 	private Developer dev;
 	
@@ -31,6 +37,10 @@ public class FeedResponse {
 	@JoinColumn(name = "feedId", referencedColumnName = "feedId")
 	private Feed feed;
 	
+	public FeedResponse() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public FeedResponse(int respId, String answer, LocalDate respDate, LocalTime respTime, int accuracy, Developer dev,
 			Feed feed) {
 		super();

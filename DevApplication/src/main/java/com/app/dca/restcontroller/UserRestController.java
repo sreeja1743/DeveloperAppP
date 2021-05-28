@@ -1,6 +1,9 @@
 package com.app.dca.restcontroller;
 
 
+import java.time.LocalDateTime;
+
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,32 +17,27 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.dca.entity.UserD;
 import com.app.dca.service.IUserService;
 import com.app.dca.service.IUserServiceImpl;
+
+import io.swagger.annotations.Api;
 @Validated
 @RestController
 @RequestMapping("/api")
-public class UserRestController {
+@Api(value = "Developer application")
+	public class UserRestController {
+	
+	Logger log = org.slf4j.LoggerFactory.getLogger(UserD.class);
+	
 	@Autowired
 	private IUserServiceImpl service;
 	
-	@PostMapping("/User")
-	public UserD addUser(@RequestBody UserD u) {
-		return service.addUser(u);
+	public UserRestController() {
+		log.info("UserRestController -- constructor ");
+		System.out.println("---->> User Rest constructor");
 	}
 	
-	@PutMapping("/update")
-	public UserD updateUser(@RequestBody UserD u) {
-	return service.editUser(u);
-	}
-	
-	@GetMapping("/UserId/{id}")
-	public UserD getUser(@PathVariable int userid)  {
-		return service.getUser(userid);
-	}
-	
-	
-	@GetMapping("/delete/{id}")
-	public UserD removeFeed(@PathVariable int userid) {
-		return service.removeUser(userid);
+	@GetMapping("/home")
+	public String homeRequest() {
+		return "Welcome : Developer Community Application" + LocalDateTime.now();
 	}
 	
 	

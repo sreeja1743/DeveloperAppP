@@ -6,4 +6,5 @@ import com.app.dca.entity.Feed;
 
 public interface CustomFeedRepository {
    public List<Feed> getFeedsByTopic(String topic);
+   public List<Feed> getFeedsByKeyWord(String keyword);
 }

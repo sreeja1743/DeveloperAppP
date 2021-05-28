@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.app.dca.entity.Developer;
 import com.app.dca.entity.Feed;
+import com.app.dca.entity.FeedResponse;
 import com.app.dca.exception.UnknownDeveloperException;
 import com.app.dca.exception.UnknownFeedException;
 import com.app.dca.repository.FeedRepository;
-import com.app.dca.repository.IDeveloperRepository;
-import com.app.dca.repository.IFeedRepository;
+
+
 import com.app.dca.exception.UnknownFeedException;
 
 @Service
@@ -46,37 +47,34 @@ public class IFeedServiceImpl implements IFeedService{
 	}
 
 	@Override
-	public Feed getFeed(int feedId) {//throws UnknownFeedException{
+	public Feed getFeed(int feedId) throws UnknownFeedException {
 		Feed f = repo.findById(feedId).get();
-		/*if(repo.findById(feedId).isEmpty()) {
-		 throw new UnknownFeedException();
-		}*/
-
+		if(f.equals(null))
+			throw new UnknownFeedException();
 		return repo.findById(feedId).get();
 	}
 
 	@Override
-	public Feed removeFeed(int feedId) {//throws UnknownFeedException{
-		Optional<Feed> f = repo.findById(feedId);
-		Feed del = repo.findById(feedId).get();
-		/*if(f.isEmpty()){
-			 throw new UnknownFeedException();
-			}
-		else*/
-			repo.deleteById(feedId);
-		return del;
+	public String removeFeed(int feedId) throws UnknownFeedException {
+		Feed feed = repo.findById(feedId).get();
+		if(feed.equals(null))
+			throw new UnknownFeedException();
+	repo.deleteById(feedId);
+		return "deleted";
 	}
 
 	@Override
 	public List<Feed> getFeedsByDeveloper(int devId) throws UnknownDeveloperException{
 	    Developer d = devServcie.getDeveloper(devId);
+	    if(d.equals(null))
+	    	throw new UnknownDeveloperException();
 		return d.getFeeds();
 	}
 
 	@Override
 	public List<Feed> getFeedsByKeyword(String keyword) {
 		
-		return null;
+		return repo.getFeedsByKeyWord(keyword);
 	}
 
 	@Override

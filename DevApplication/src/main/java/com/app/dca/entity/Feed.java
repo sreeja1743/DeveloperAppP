@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -25,27 +27,35 @@ public class Feed {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@NotEmpty(message = "Id cannot be left empty")
 	private int feedId;
 	
-	//@Column(name = "FeedQuery")
+
 	private String queryQ;
 	
+	 @JsonFormat(pattern="yyyy-MM-dd")
 	private LocalDate feedDate;
+	 
+	 @JsonFormat(pattern = "hh:mm:ss a")
 	private LocalTime feedTime;
 	
 	private String topic;	// Programming/Java/Testing
 	private int relevance;// Likes on Feed increase relevance, write custom query
+	private int totalComments;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "devId", referencedColumnName = "devId")
 	private Developer dev;
 	
-	@OneToMany(mappedBy = "feed")
+	@OneToMany(mappedBy = "feed", orphanRemoval = true)
 	private List<FeedResponse> responses;
 	
-	private int totalComments;
 	
+	public Feed() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Feed(int feedId, String queryQ, LocalDate feedDate, LocalTime feedTime, String topic, int relevance,
 			Developer dev, List<FeedResponse> responses, int totalComments) {
 		super();

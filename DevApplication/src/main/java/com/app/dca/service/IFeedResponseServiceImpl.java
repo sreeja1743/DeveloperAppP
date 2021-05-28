@@ -8,18 +8,25 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.dca.entity.Developer;
+import com.app.dca.entity.Feed;
 import com.app.dca.entity.FeedResponse;
 import com.app.dca.exception.UnknownDeveloperException;
 import com.app.dca.exception.UnknownFeedException;
 import com.app.dca.exception.UnknownFeedResponseException;
+import com.app.dca.repository.DeveloperRepository;
+import com.app.dca.repository.FeedRepository;
 import com.app.dca.repository.FeedResponseRepository;
-import com.app.dca.repository.IFeedResponseRepository;
+
 
 @Service
 public class IFeedResponseServiceImpl implements IFeedResponseService {
 	
 	@Autowired
 	private FeedResponseRepository repo;
+	@Autowired
+	private FeedRepository fr;
+  
 	
 	
 	@Override
@@ -33,48 +40,41 @@ public class IFeedResponseServiceImpl implements IFeedResponseService {
 	
 	@Override
 	public FeedResponse editResponse(FeedResponse resp, Integer id) {
-		// TODO Auto-generated method stub
-		Optional<FeedResponse> up = repo.findById(id);
-		FeedResponse response = null;
-
-		if(up.isPresent())
-		{
-			 response = up.get();
-
-			response.setRespId(resp.getRespId());
-			response.setAnswer(resp.getAnswer());
-			response.setRespDate(resp.getRespDate());
-			response.setRespTime(resp.getRespTime());
-			response.setAccuracy(resp.getAccuracy());
-			response.setDev(resp.getDev());
-			response.setFeed(resp.getFeed());
-			return repo.save(response);
-		}
 		
-		return response;
+		return repo.save(resp);
 	}
 
 	@Override
 	public FeedResponse removeResponse(int respId) throws UnknownFeedResponseException {
-		// TODO Auto-generated method stub
+		 FeedResponse f = repo.findById(respId).get();
+		 if(f.equals(null))
+			 throw new UnknownFeedResponseException();
+		 repo.deleteById(respId);
+		return f;
 		
-		return null;
 	}
 
 	@Override
 	public FeedResponse likeResponse(int respId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		FeedResponse resp = repo.findById(respId).get();
+		resp.setAccuracy(resp.getAccuracy()+1);
+		return resp;
+		
+		
 	}
 
 	@Override
 	public List<FeedResponse> getResponseByFeed(int feedId) throws UnknownFeedException {
-
-		return repo.findAll();
+		Feed f = fr.findById(feedId).get();
+		 if(f.equals(null))
+			 throw new UnknownFeedException();
+		return f.getResponses();
 	}
 
 	@Override
 	public List<FeedResponse> getResponseByDeveloper(int devId) throws UnknownDeveloperException {
+		//Developer d = dr.findById(devId).get();
             
 		return null;
 	}
@@ -82,16 +82,17 @@ public class IFeedResponseServiceImpl implements IFeedResponseService {
 
 	@Override
 	public FeedResponse editResponse(FeedResponse resp) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return repo.save(resp);
 	}
 
 
 	@Override
 	public List<FeedResponse> getAllResponses() {
 
-		System.out.println("Inside get all responses");
 		return repo.findAll();
 	}
+
+
 
 } //end class

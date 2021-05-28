@@ -8,12 +8,4 @@ public interface IUserService {
 	
 	UserD logout(UserD user);
 
-	UserD addUser(UserD u);
-
-	UserD editUser(UserD u);
-
-	UserD getUser(int userid);
-
-	UserD removeUser(int userid);
-
 }

@@ -1,39 +1,33 @@
 package com.app.dca.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+public class UnknownFeedException extends Exception{
 
-//@ControllerAdvice
-public class UnknownFeedException extends Exception {
-
-	String message = null;
-	
 	public UnknownFeedException() {
-		message = "Invalid Feed Id, try again";
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	
 
-	@Override
-	public String toString() {
-		return "UnknownFeedException [message=" + message + "]";
+	public UnknownFeedException(String message, Throwable cause, boolean enableSuppression,
+			boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+		// TODO Auto-generated constructor stub
 	}
-	/*@ExceptionHandler
-	public ResponseEntity<MyExceptionResponse> invalidFeedId(java.util.NoSuchElementException ex)
-	{
-		
-		
-		// design custom exception response 
-		
-		MyExceptionResponse excResponse = new MyExceptionResponse();
-		excResponse.setHttpStatus(HttpStatus.BAD_REQUEST.value());
-		excResponse.setExceptionMsg("Invalid Feed Id pls try again");
-		
-		
-		return new ResponseEntity<MyExceptionResponse>(excResponse,HttpStatus.BAD_REQUEST);
-		
-	}*/
+
+	public UnknownFeedException(String message, Throwable cause) {
+		super(message, cause);
+		// TODO Auto-generated constructor stub
+	}
+
+	public UnknownFeedException(String message) {
+		super(message);
+		// TODO Auto-generated constructor stub
+	}
+
+	public UnknownFeedException(Throwable cause) {
+		super(cause);
+		// TODO Auto-generated constructor stub
+	}
+
+	
 	
 }
