@@ -1,5 +1,6 @@
 package com.app.dca.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,7 +69,17 @@ public class IFeedServiceImpl implements IFeedService{
 	    Developer d = devServcie.getDeveloper(devId);
 	    if(d.equals(null))
 	    	throw new UnknownDeveloperException();
-		return d.getFeeds();
+	    List<Feed> feed = repo.findAll();
+	    List<Feed> newFeed = new ArrayList<>();
+	    for (Feed feed2 : feed) {
+			if(feed2.getDev().getDevId() == devId)
+				newFeed.add(feed2);
+		}
+		return newFeed;
+	}
+	
+	public void getAllFeeds() {
+		repo.findAll();
 	}
 
 	@Override

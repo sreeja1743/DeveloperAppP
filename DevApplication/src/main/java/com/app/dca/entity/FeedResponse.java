@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -35,6 +36,7 @@ public class FeedResponse {
 	
 	@ManyToOne
 	@JoinColumn(name = "feedId", referencedColumnName = "feedId")
+	
 	private Feed feed;
 	
 	public FeedResponse() {
@@ -149,8 +151,8 @@ public class FeedResponse {
 	}
 	@Override
 	public String toString() {
-		return "Response [respId=" + respId + ", answer=" + answer + ", respDate=" + respDate + ", respTime=" + respTime
-				+ ", accuracy=" + accuracy + ", dev=" + dev + ", feed=" + feed + "]";
+		return "Response [feed="+ feed +" respId=" + respId + ", answer=" + answer + ", respDate=" + respDate + ", respTime=" + respTime
+				+ ", accuracy=" + accuracy + ", dev=" + dev + "]";
 	}
 	
 }

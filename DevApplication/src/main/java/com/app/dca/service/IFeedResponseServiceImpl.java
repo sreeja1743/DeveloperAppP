@@ -1,5 +1,6 @@
 package com.app.dca.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,9 +70,15 @@ public class IFeedResponseServiceImpl implements IFeedResponseService {
 		Feed f = fr.findById(feedId).get();
 		 if(f.equals(null))
 			 throw new UnknownFeedException();
-		return f.getResponses();
+		 List<FeedResponse> feedResponse = repo.findAll();
+		 List<FeedResponse> newFeedResponse = new ArrayList<>(); 
+		 for (FeedResponse feedResponse2 : feedResponse) {
+			  if(feedResponse2.getFeed().getFeedId() == feedId)
+				  newFeedResponse.add(feedResponse2);
+		}
+		return newFeedResponse;
 	}
-
+	
 	@Override
 	public List<FeedResponse> getResponseByDeveloper(int devId) throws UnknownDeveloperException {
 		//Developer d = dr.findById(devId).get();

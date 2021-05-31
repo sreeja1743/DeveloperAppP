@@ -16,7 +16,9 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -57,7 +59,7 @@ public class Feed {
 	}
 
 	public Feed(int feedId, String queryQ, LocalDate feedDate, LocalTime feedTime, String topic, int relevance,
-			Developer dev, List<FeedResponse> responses, int totalComments) {
+			Developer dev, int totalComments) {
 		super();
 		this.feedId = feedId;
 		this.queryQ = queryQ;
@@ -66,7 +68,6 @@ public class Feed {
 		this.topic = topic;
 		this.relevance = relevance;
 		this.dev = dev;
-		this.responses = responses;
 		this.totalComments = totalComments;
 	}
 	
@@ -112,12 +113,6 @@ public class Feed {
 	public void setDev(Developer dev) {
 		this.dev = dev;
 	}
-	public List<FeedResponse> getResponses() {
-		return responses;
-	}
-	public void setResponses(List<FeedResponse> responses) {
-		this.responses = responses;
-	}
 	public int getTotalComments() {
 		return totalComments;
 	}
@@ -138,7 +133,6 @@ public class Feed {
 		result = prime * result + ((feedTime == null) ? 0 : feedTime.hashCode());
 		result = prime * result + ((queryQ == null) ? 0 : queryQ.hashCode());
 		result = prime * result + relevance;
-		result = prime * result + ((responses == null) ? 0 : responses.hashCode());
 		result = prime * result + ((topic == null) ? 0 : topic.hashCode());
 		result = prime * result + totalComments;
 		return result;
@@ -177,11 +171,6 @@ public class Feed {
 			return false;
 		if (relevance != other.relevance)
 			return false;
-		if (responses == null) {
-			if (other.responses != null)
-				return false;
-		} else if (!responses.equals(other.responses))
-			return false;
 		if (topic == null) {
 			if (other.topic != null)
 				return false;
@@ -195,8 +184,8 @@ public class Feed {
 	@Override
 	public String toString() {
 		return "Feed [feedId=" + feedId + ", query=" + queryQ + ", feedDate=" + feedDate + ", feedTime=" + feedTime
-				+ ", topic=" + topic + ", relevance=" + relevance + ", dev=" + dev + ", responses=" + responses
-				+ ", totalComments=" + totalComments + "]";
+				+ ", topic=" + topic + ", relevance=" + relevance + ", dev=" + dev + 
+				 ", totalComments=" + totalComments + "]";
 	}
 	
 	

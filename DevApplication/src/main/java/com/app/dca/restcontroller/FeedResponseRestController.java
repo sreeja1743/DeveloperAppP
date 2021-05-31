@@ -42,11 +42,7 @@ public class FeedResponseRestController {
 		System.out.println("--------Response Rest Controller Constructor----------");
 	}
 	
-	@GetMapping("/home")
-	public String homeRequest()
-	{
-		return "Welcome : My Developer Community Application "+LocalDateTime.now();
-	}
+
 	
 	@PostMapping("/response")
 	public FeedResponse addResponse(@RequestBody @Valid FeedResponse resp)
@@ -71,7 +67,7 @@ public class FeedResponseRestController {
 		return service.removeResponse(id);
 	}
 	
-	@GetMapping("/getByFeedId")
+	@GetMapping("/getByFeedId/{feedId}")
 	public List<FeedResponse> getResponsesByFeed(@PathVariable int feedId) throws UnknownFeedException 
 	{
 		log.info("inside get list of responses by feedId");

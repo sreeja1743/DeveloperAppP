@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -45,6 +46,13 @@ public class Developer{
    
 	private LocalDate memberSince;
 	
+private int totalFeeds;	
+	
+	private int reputation;		// Likes on Feed/Response by developer increase reputation
+	
+	private boolean isVerified;
+	
+	private boolean isBlocked;	// Can be blocked by admin on the ground of unethical feed/response
 	
 	@OneToMany(mappedBy = "dev", orphanRemoval = true)
 	private List<Feed> feeds;
@@ -53,15 +61,9 @@ public class Developer{
    @JoinColumn(name = "userId", referencedColumnName = "userId")
    private UserD user;
 	
-	private int totalFeeds;	
+	// Can be blocked by admin on the ground of unethical feed/response
 	
-	private int reputation;		// Likes on Feed/Response by developer increase reputation
-	
-	private boolean isVerified;
-	
-	private boolean isBlocked;	// Can be blocked by admin on the ground of unethical feed/response
-	
-	public Developer(int devId, String name, String email, String skillLevel, LocalDate memberSince, List<Feed> feeds,
+	public Developer(int devId, String name, String email, String skillLevel, LocalDate memberSince,
 			UserD user, int totalFeeds, int reputation, boolean isVerified, boolean isBlocked) {
 	    super();
 		this.devId = devId;
@@ -69,7 +71,6 @@ public class Developer{
 		this.email = email;
 		this.skillLevel = skillLevel;
 		this.memberSince = memberSince;
-		this.feeds = feeds;
 		this.user = user;
 		this.totalFeeds = totalFeeds;
 		this.reputation = reputation;
@@ -116,15 +117,10 @@ public class Developer{
 	public void setMemberSince(LocalDate memberSince) {
 		this.memberSince = memberSince;
 	}
-	public List<Feed> getFeeds() {
-		return feeds;
-	}
-	public void setFeeds(List<Feed> feeds) {
-		this.feeds = feeds;
-	}
 	public UserD getUser() {
 		return user;
 	}
+
 	public void setUser(UserD user) {
 		this.user = user;
 	}
@@ -158,7 +154,6 @@ public class Developer{
 		int result = 1;
 		result = prime * result + devId;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((feeds == null) ? 0 : feeds.hashCode());
 		result = prime * result + (isBlocked ? 1231 : 1237);
 		result = prime * result + (isVerified ? 1231 : 1237);
 		result = prime * result + ((memberSince == null) ? 0 : memberSince.hashCode());
@@ -184,11 +179,6 @@ public class Developer{
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
-			return false;
-		if (feeds == null) {
-			if (other.feeds != null)
-				return false;
-		} else if (!feeds.equals(other.feeds))
 			return false;
 		if (isBlocked != other.isBlocked)
 			return false;
@@ -223,7 +213,7 @@ public class Developer{
 	@Override
 	public String toString() {
 		return "Developer [devId=" + devId + ", name=" + name + ", email=" + email + ", skillLevel=" + skillLevel
-				+", memberSince=" + memberSince +", feeds=" + feeds + ", user=" + user + ", totalFeeds=" + totalFeeds
+				+", memberSince=" + memberSince + ", user=" + user + ", totalFeeds=" + totalFeeds
 				+ ", reputation=" + reputation + ", isVerified=" + isVerified + ", isBlocked=" + isBlocked + "]";
 	}
 	
