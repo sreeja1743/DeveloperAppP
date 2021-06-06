@@ -1,11 +1,11 @@
 package com.app.dca.service;
 
-import com.app.dca.entity.UserD;
+import com.app.dca.entity.Userdeveloper;
 
 public interface IUserService {
 
-	UserD login(UserD user);
+	Userdeveloper login(Userdeveloper user);
 	
-	UserD logout(UserD user);
+	Userdeveloper logout(Userdeveloper user);
 
 }

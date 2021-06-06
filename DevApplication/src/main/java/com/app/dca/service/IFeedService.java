@@ -1,6 +1,7 @@
 package com.app.dca.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.app.dca.entity.Feed;
 import com.app.dca.exception.*;
@@ -14,11 +15,11 @@ public interface IFeedService {
 	
 	Feed getFeed(int feedId) throws UnknownFeedException;
 	
-	String removeFeed(int feedId) throws UnknownFeedException;
+	Feed removeFeed(int feedId) throws UnknownFeedException;
 	//jpql
-	List<Feed> getFeedsByDeveloper(int devId) throws UnknownDeveloperException;
+	Optional<List<Feed>> getFeedsByDeveloper(int devId) throws UnknownDeveloperException;
 	
-	List<Feed> getFeedsByKeyword(String keyword);
+	Optional<List<Feed>> getFeedsByKeyword(String keyword);
 	
-	List<Feed> getFeedsByTopic(String topic);
+	Optional<List<Feed>> getFeedsByTopic(String topic);
 }

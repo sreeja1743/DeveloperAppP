@@ -1,6 +1,7 @@
 package com.app.dca.restcontroller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
@@ -65,20 +66,20 @@ public class FeedRestController {
 	
 	
 	@DeleteMapping("/deletefeed/{id}")
-	public String removeFeed(@PathVariable int id) throws UnknownFeedException{
+	public Feed removeFeed(@PathVariable int id) throws UnknownFeedException{
 		logger.info("inside delete feed");
 		
 		return service.removeFeed(id);
 	}
 	
 	@GetMapping("/DevelopersFeed/{id}")
-	public List<Feed> getFeedsByDeveloper(@PathVariable int id) throws UnknownDeveloperException{
+	public Optional<List<Feed>> getFeedsByDeveloper(@PathVariable int id) throws UnknownDeveloperException{
 		logger.info("inside get feed information by developer");
 		return service.getFeedsByDeveloper(id);
 	}
 	
 	@GetMapping("/topic/{topic}")
-	public List<Feed> getFeedsByTopic(@PathVariable String topic){
+	public Optional<List<Feed>> getFeedsByTopic(@PathVariable String topic){
 		
 		logger.info("inside get feed by topic");
 		
@@ -86,7 +87,7 @@ public class FeedRestController {
 	}
 	
 	@GetMapping("/keyword/{keyword}")
-	public List<Feed> getFeedsByKeyword(@PathVariable String keyword){
+	public Optional<List<Feed>> getFeedsByKeyword(@PathVariable String keyword){
 		
 		logger.info("inside get feed by keyword");
 		

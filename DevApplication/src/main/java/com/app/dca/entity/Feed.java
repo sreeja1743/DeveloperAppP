@@ -49,8 +49,8 @@ public class Feed {
 	@JoinColumn(name = "devId", referencedColumnName = "devId")
 	private Developer dev;
 	
-	@OneToMany(mappedBy = "feed", orphanRemoval = true)
-	private List<FeedResponse> responses;
+	@OneToMany(mappedBy = "feed")
+	private List<Feedresponse> responses;
 	
 	
 	public Feed() {

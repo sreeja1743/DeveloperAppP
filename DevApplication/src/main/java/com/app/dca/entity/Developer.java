@@ -59,12 +59,12 @@ private int totalFeeds;
 	
    @OneToOne(orphanRemoval = true)
    @JoinColumn(name = "userId", referencedColumnName = "userId")
-   private UserD user;
+   private Userdeveloper user;
 	
 	// Can be blocked by admin on the ground of unethical feed/response
 	
 	public Developer(int devId, String name, String email, String skillLevel, LocalDate memberSince,
-			UserD user, int totalFeeds, int reputation, boolean isVerified, boolean isBlocked) {
+			Userdeveloper user, int totalFeeds, int reputation, boolean isVerified, boolean isBlocked) {
 	    super();
 		this.devId = devId;
 		this.name = name;
@@ -117,11 +117,11 @@ private int totalFeeds;
 	public void setMemberSince(LocalDate memberSince) {
 		this.memberSince = memberSince;
 	}
-	public UserD getUser() {
+	public Userdeveloper getUser() {
 		return user;
 	}
 
-	public void setUser(UserD user) {
+	public void setUser(Userdeveloper user) {
 		this.user = user;
 	}
 	public int getTotalFeeds() {

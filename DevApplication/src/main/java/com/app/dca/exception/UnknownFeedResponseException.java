@@ -1,6 +1,23 @@
 package com.app.dca.exception;
 
 public class UnknownFeedResponseException extends Exception {
+    private int id;
+    
+	public UnknownFeedResponseException(int id) {
+		super();
+		this.id = id;
+	}
+
+	
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 
 	public UnknownFeedResponseException() {
 		super();

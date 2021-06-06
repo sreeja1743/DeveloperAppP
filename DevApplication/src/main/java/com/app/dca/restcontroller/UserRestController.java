@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dca.entity.UserD;
+import com.app.dca.entity.Userdeveloper;
 import com.app.dca.service.IUserService;
 import com.app.dca.service.IUserServiceImpl;
 
@@ -25,7 +25,7 @@ import io.swagger.annotations.Api;
 @Api(value = "Developer application")
 	public class UserRestController {
 	
-	Logger log = org.slf4j.LoggerFactory.getLogger(UserD.class);
+	Logger log = org.slf4j.LoggerFactory.getLogger(Userdeveloper.class);
 	
 	@Autowired
 	private IUserServiceImpl service;

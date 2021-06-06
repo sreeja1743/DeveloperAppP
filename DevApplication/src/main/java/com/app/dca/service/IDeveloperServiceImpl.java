@@ -14,9 +14,18 @@ import com.app.dca.repository.DeveloperRepository;
 
 @Service
 public class IDeveloperServiceImpl implements IDeveloperService{
+	
 	@Autowired
 	private DeveloperRepository repo;
 	
+	public IDeveloperServiceImpl(DeveloperRepository repo) {
+	  this.repo = repo;
+	}
+
+   public IDeveloperServiceImpl() {
+	super();
+	}
+
 	@Override
 	@Transactional
 	public Developer addDeveloper(Developer dev)
@@ -30,6 +39,10 @@ public class IDeveloperServiceImpl implements IDeveloperService{
 	@Override
 	public Developer getDeveloper(int devId) throws UnknownDeveloperException
 	{
+		Optional<Developer> s = repo.findById(devId);
+		if(s.isEmpty()) {
+			throw new UnknownDeveloperException(devId);
+		}
 		return repo.findById(devId).get();
 	}
 	

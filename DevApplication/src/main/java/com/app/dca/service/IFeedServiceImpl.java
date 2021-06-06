@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.app.dca.entity.Developer;
 import com.app.dca.entity.Feed;
-import com.app.dca.entity.FeedResponse;
+import com.app.dca.entity.Feedresponse;
 import com.app.dca.exception.UnknownDeveloperException;
 import com.app.dca.exception.UnknownFeedException;
 import com.app.dca.repository.FeedRepository;
@@ -28,6 +28,15 @@ public class IFeedServiceImpl implements IFeedService{
 	@Autowired
 	private IDeveloperService devServcie;
 	
+	public IFeedServiceImpl() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public IFeedServiceImpl(FeedRepository repo) {
+		this.repo = repo;
+	}
+
 	@Override
 	@Transactional
 	public Feed addFeed(Feed feed){
@@ -52,30 +61,26 @@ public class IFeedServiceImpl implements IFeedService{
 		Feed f = repo.findById(feedId).get();
 		if(f.equals(null))
 			throw new UnknownFeedException();
-		return repo.findById(feedId).get();
+		return f;
 	}
 
 	@Override
-	public String removeFeed(int feedId) throws UnknownFeedException {
+	public Feed removeFeed(int feedId) throws UnknownFeedException {
 		Feed feed = repo.findById(feedId).get();
 		if(feed.equals(null))
 			throw new UnknownFeedException();
 	repo.deleteById(feedId);
-		return "deleted";
+		return feed;
 	}
 
 	@Override
-	public List<Feed> getFeedsByDeveloper(int devId) throws UnknownDeveloperException{
-	    Developer d = devServcie.getDeveloper(devId);
-	    if(d.equals(null))
-	    	throw new UnknownDeveloperException();
-	    List<Feed> feed = repo.findAll();
-	    List<Feed> newFeed = new ArrayList<>();
-	    for (Feed feed2 : feed) {
-			if(feed2.getDev().getDevId() == devId)
-				newFeed.add(feed2);
+	public Optional<List<Feed>> getFeedsByDeveloper(int devId) throws UnknownDeveloperException{
+		Optional<List<Feed>> feed = repo.getFeedsByDeveloper(devId);
+		if(feed==null || feed.isEmpty()) {
+			throw new UnknownDeveloperException(devId);
 		}
-		return newFeed;
+	   
+		return feed;
 	}
 	
 	public void getAllFeeds() {
@@ -83,13 +88,13 @@ public class IFeedServiceImpl implements IFeedService{
 	}
 
 	@Override
-	public List<Feed> getFeedsByKeyword(String keyword) {
+	public Optional<List<Feed>> getFeedsByKeyword(String keyword) {
 		
 		return repo.getFeedsByKeyWord(keyword);
 	}
 
 	@Override
-	public List<Feed> getFeedsByTopic(String topic) {
+	public Optional<List<Feed>> getFeedsByTopic(String topic) {
 		
 	return repo.getFeedsByTopic(topic);
 	}

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.app.dca.entity.Developer;
 import com.app.dca.entity.Feed;
-import com.app.dca.entity.FeedResponse;
+import com.app.dca.entity.Feedresponse;
 import com.app.dca.exception.UnknownDeveloperException;
 import com.app.dca.exception.UnknownFeedException;
 import com.app.dca.exception.UnknownFeedResponseException;
@@ -24,41 +24,49 @@ import com.app.dca.repository.FeedResponseRepository;
 public class IFeedResponseServiceImpl implements IFeedResponseService {
 	
 	@Autowired
-	private FeedResponseRepository repo;
+	private FeedResponseRepository feedResRepo;
 	@Autowired
-	private FeedRepository fr;
-  
+	private IFeedServiceImpl fr;
+	private DeveloperRepository devRepo;
+  	
+	public IFeedResponseServiceImpl(FeedResponseRepository feedResRepo) {
+		// TODO Auto-generated constructor stub
+		super();
+		this.feedResRepo=feedResRepo;
+	}
 	
 	
+
+
 	@Override
 	@Transactional
-	public FeedResponse addResponse(FeedResponse resp) {
+	public Feedresponse addResponse(Feedresponse resp) {
 		
-		repo.save(resp);
+		feedResRepo.save(resp);
 		return resp;
 	}
 
 	
 	@Override
-	public FeedResponse editResponse(FeedResponse resp, Integer id) {
+	public Feedresponse editResponse(Feedresponse resp, Integer id) {
 		
-		return repo.save(resp);
+		return feedResRepo.save(resp);
 	}
 
 	@Override
-	public FeedResponse removeResponse(int respId) throws UnknownFeedResponseException {
-		 FeedResponse f = repo.findById(respId).get();
+	public Feedresponse removeResponse(int respId) throws UnknownFeedResponseException {
+		 Feedresponse f = feedResRepo.findById(respId).get();
 		 if(f.equals(null))
 			 throw new UnknownFeedResponseException();
-		 repo.deleteById(respId);
+		 feedResRepo.deleteById(respId);
 		return f;
 		
 	}
 
 	@Override
-	public FeedResponse likeResponse(int respId) {
+	public Feedresponse likeResponse(int respId) {
 		
-		FeedResponse resp = repo.findById(respId).get();
+		Feedresponse resp = feedResRepo.findById(respId).get();
 		resp.setAccuracy(resp.getAccuracy()+1);
 		return resp;
 		
@@ -66,40 +74,40 @@ public class IFeedResponseServiceImpl implements IFeedResponseService {
 	}
 
 	@Override
-	public List<FeedResponse> getResponseByFeed(int feedId) throws UnknownFeedException {
-		Feed f = fr.findById(feedId).get();
-		 if(f.equals(null))
-			 throw new UnknownFeedException();
-		 List<FeedResponse> feedResponse = repo.findAll();
-		 List<FeedResponse> newFeedResponse = new ArrayList<>(); 
-		 for (FeedResponse feedResponse2 : feedResponse) {
-			  if(feedResponse2.getFeed().getFeedId() == feedId)
-				  newFeedResponse.add(feedResponse2);
+	public Optional<List<Feedresponse>> getResponseByFeed(int feedId) throws UnknownFeedException {
+		Optional<List<Feedresponse>> feedResponse = feedResRepo.getResponseByFeed(feedId);
+		if(feedResponse==null || feedResponse.isEmpty()) {
+			throw new UnknownFeedException(feedId);
 		}
-		return newFeedResponse;
+		return feedResponse;
 	}
 	
 	@Override
-	public List<FeedResponse> getResponseByDeveloper(int devId) throws UnknownDeveloperException {
-		//Developer d = dr.findById(devId).get();
-            
-		return null;
-	}
-
-
-	@Override
-	public FeedResponse editResponse(FeedResponse resp) {
+	public Optional<List<Feedresponse>> getResponseByDeveloper(int devId) throws UnknownDeveloperException {
+		Optional<List<Feedresponse>> feedResponse = feedResRepo.getResponseByDeveloper(devId);
+		if(feedResponse==null || feedResponse.isEmpty()) {
+			throw new UnknownDeveloperException(devId);
+		}
+	   
+		return feedResponse;
 		
-		return repo.save(resp);
+            
 	}
 
 
 	@Override
-	public List<FeedResponse> getAllResponses() {
-
-		return repo.findAll();
+	public Feedresponse editResponse(Feedresponse resp) {
+		
+		return feedResRepo.save(resp);
 	}
 
 
+	@Override
+	public List<Feedresponse> getAllResponses() {
+
+		return feedResRepo.findAll();
+	}
+	
+	
 
 } //end class

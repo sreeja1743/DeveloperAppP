@@ -33,7 +33,7 @@ public class DeveloperRestController {
 	
 	public DeveloperRestController() {
 		log.info("DeveloperRestController -- constructor ");
-		System.out.println(" ----->> Product Rest Controller Constructor ");
+		System.out.println(" ----->> Developer Rest Controller Constructor ");
 	}
 	
 	@GetMapping("/devhome")

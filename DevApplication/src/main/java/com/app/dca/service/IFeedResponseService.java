@@ -1,28 +1,29 @@
 package com.app.dca.service;
 
 import java.util.List;
+import java.util.Optional;
 
-import com.app.dca.entity.FeedResponse;
+import com.app.dca.entity.Feedresponse;
 import com.app.dca.exception.UnknownDeveloperException;
 import com.app.dca.exception.UnknownFeedException;
 import com.app.dca.exception.UnknownFeedResponseException;
 
 public interface IFeedResponseService {
 	
-	FeedResponse addResponse(FeedResponse resp);
+	Feedresponse addResponse(Feedresponse resp);
 	
-	FeedResponse editResponse(FeedResponse resp);
+	Feedresponse editResponse(Feedresponse resp);
 	
-	FeedResponse removeResponse(int respId) throws UnknownFeedResponseException;
+	Feedresponse removeResponse(int respId) throws UnknownFeedResponseException;
 	
-	FeedResponse likeResponse(int respId);
+	Feedresponse likeResponse(int respId);
 	
-	List<FeedResponse> getResponseByFeed(int feedId) throws UnknownFeedException;
+	Optional<List<Feedresponse>> getResponseByFeed(int feedId) throws UnknownFeedException;
 	
-	List<FeedResponse> getResponseByDeveloper(int devId) throws UnknownDeveloperException;
+	Optional<List<Feedresponse>> getResponseByDeveloper(int devId) throws UnknownDeveloperException;
 
-	FeedResponse editResponse(FeedResponse resp, Integer id);
+	Feedresponse editResponse(Feedresponse resp, Integer id);
 
-	List<FeedResponse> getAllResponses();
+	List<Feedresponse> getAllResponses();
 	
 }
