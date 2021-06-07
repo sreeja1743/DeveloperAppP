@@ -61,16 +61,13 @@ public class IDeveloperServiceImpl implements IDeveloperService{
 
 
 	@Override
-	public Developer statusUpdate(Developer dev, int id) {
-		Optional<Developer> up = repo.findById(id);
-		Developer developer = null;
-		if(up.isPresent())
+	public Developer statusUpdate(Developer dev) {
+
+		if(dev.getReputation() < 0)
 		{
-			developer = up.get();
-			
-			developer.setBlocked(dev.isBlocked());
+			dev.setBlocked(false);
 		}
-		
-		return null;
+		dev.setBlocked(true);
+		return dev;
 	}
 }

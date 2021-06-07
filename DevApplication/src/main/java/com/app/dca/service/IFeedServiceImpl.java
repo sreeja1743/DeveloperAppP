@@ -43,7 +43,7 @@ public class IFeedServiceImpl implements IFeedService{
 
 	@Override
 	public Feed editFeed(Feed feed) {
-		
+			
 		return repo.save(feed);
 	}
 

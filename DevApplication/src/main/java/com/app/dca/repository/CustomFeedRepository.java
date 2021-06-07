@@ -9,4 +9,5 @@ public interface CustomFeedRepository {
    public Optional<List<Feed>> getFeedsByTopic(String topic);
    public Optional<List<Feed>> getFeedsByKeyWord(String keyword);
    public Optional<List<Feed>> getFeedsByDeveloper(int devId);
+   
 }

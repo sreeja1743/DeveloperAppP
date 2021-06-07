@@ -2,14 +2,17 @@ package com.app.dca.restcontroller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,13 +25,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.app.dca.dto.FeedDTO;
+
 import com.app.dca.entity.Feed;
 import com.app.dca.service.IFeedService;
 import com.app.dca.service.IFeedServiceImpl;
 import com.app.dca.exception.GlobalExceptionHandler;
 import com.app.dca.exception.UnknownDeveloperException;
 import com.app.dca.exception.UnknownFeedException;
+
 
 @Validated
 @RestController
@@ -42,15 +46,14 @@ public class FeedRestController {
 	private IFeedServiceImpl service;
 	
 	@PostMapping("/feed")
-	public FeedDTO addFeed(@RequestBody @Valid Feed f) {
+	public Feed addFeed(@RequestBody @Valid Feed f) {
 		logger.info("inside add feed");
-		 Feed dup = service.addFeed(f);
-		 FeedDTO dupFeed = new FeedDTO(dup.getFeedId(),dup.getQuery(),dup.getFeedDate(),dup.getFeedTime(),dup.getTopic(),dup.getRelevance(),dup.getTotalComments());
-		 return dupFeed;
+		
+		 return service.addFeed(f);
 	}
 	
 	@PutMapping("/updatefeed")
-	public Feed updateFeed(@RequestBody Feed f) {
+	public Feed updateFeed(@RequestBody Feed f){
 		
 		logger.info("inside update feed ");
 		
@@ -93,5 +96,8 @@ public class FeedRestController {
 		
 		return service.getFeedsByKeyword(keyword);
 	}
-	
 }
+	
+
+	
+	

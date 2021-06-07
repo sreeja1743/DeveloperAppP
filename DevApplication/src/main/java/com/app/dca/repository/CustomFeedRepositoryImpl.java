@@ -1,13 +1,18 @@
 package com.app.dca.repository;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.app.dca.entity.Feed;
+
+
 
 public class CustomFeedRepositoryImpl implements CustomFeedRepository {
 
@@ -35,6 +40,7 @@ public class CustomFeedRepositoryImpl implements CustomFeedRepository {
 	     q.setParameter("devId", devId);
 	     return Optional.of(q.getResultList());
 	}
-	
+
+
 
 }

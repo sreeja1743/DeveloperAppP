@@ -25,10 +25,12 @@ public class Feedresponse {
 	
 	private String answer;
 	
-	
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private LocalDate respDate;
 	
+	@JsonFormat(pattern="hh:mm:ss a")
 	private LocalTime respTime;
+	
 	private int accuracy;	// Likes on Response increase accuracy
 	
 	 @OneToOne
@@ -37,13 +39,13 @@ public class Feedresponse {
 	
 	@ManyToOne
 	@JoinColumn(name = "feedId", referencedColumnName = "feedId")
-	
 	private Feed feed;
 	
 	public Feedresponse() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	public Feedresponse(int respId, String answer, LocalDate respDate, LocalTime respTime, int accuracy, Developer dev,
 			Feed feed) {
 		super();
@@ -55,6 +57,7 @@ public class Feedresponse {
 		this.dev = dev;
 		this.feed = feed;
 	}
+	
 	public int getRespId() {
 		return respId;
 	}
@@ -97,6 +100,7 @@ public class Feedresponse {
 	public void setFeed(Feed feed) {
 		this.feed = feed;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -110,6 +114,7 @@ public class Feedresponse {
 		result = prime * result + ((respTime == null) ? 0 : respTime.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

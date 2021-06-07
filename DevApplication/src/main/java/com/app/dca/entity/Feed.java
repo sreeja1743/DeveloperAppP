@@ -31,13 +31,12 @@ public class Feed {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int feedId;
 	
-
 	private String queryQ;
 	
-	 @JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private LocalDate feedDate;
 	 
-	 @JsonFormat(pattern = "hh:mm:ss a")
+	@JsonFormat(pattern="hh:mm:ss a")
 	private LocalTime feedTime;
 	
 	private String topic;	// Programming/Java/Testing

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dca.dto.FeedResponseDTO;
+
 import com.app.dca.entity.Feedresponse;
 import com.app.dca.exception.UnknownDeveloperException;
 import com.app.dca.exception.UnknownFeedException;
@@ -50,7 +50,7 @@ public class FeedResponseRestController {
 	{
 		log.info("inside add Response");
 		Feedresponse f = service.addResponse(resp);
-		FeedResponseDTO dto = new FeedResponseDTO(f.getRespId(), f.getAnswer(),f.getRespDate(),f.getRespTime(),f.getAccuracy());
+		//FeedResponseDTO dto = new FeedResponseDTO(f.getRespId(), f.getAnswer(),f.getRespDate(),f.getRespTime(),f.getAccuracy());
 		return resp;
 	}
 	

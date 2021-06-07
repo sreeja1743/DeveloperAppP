@@ -46,7 +46,7 @@ public class Developer{
    
 	private LocalDate memberSince;
 	
-private int totalFeeds;	
+    private int totalFeeds;	
 	
 	private int reputation;		// Likes on Feed/Response by developer increase reputation
 	
@@ -54,14 +54,13 @@ private int totalFeeds;
 	
 	private boolean isBlocked;	// Can be blocked by admin on the ground of unethical feed/response
 	
-	@OneToMany(mappedBy = "dev", orphanRemoval = true)
+	@OneToMany(mappedBy = "dev")
 	private List<Feed> feeds;
 	
-   @OneToOne(orphanRemoval = true)
+   @OneToOne
    @JoinColumn(name = "userId", referencedColumnName = "userId")
    private Userdeveloper user;
 	
-	// Can be blocked by admin on the ground of unethical feed/response
 	
 	public Developer(int devId, String name, String email, String skillLevel, LocalDate memberSince,
 			Userdeveloper user, int totalFeeds, int reputation, boolean isVerified, boolean isBlocked) {

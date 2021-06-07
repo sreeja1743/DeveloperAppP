@@ -13,7 +13,6 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 public class Userdeveloper {
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@NotEmpty(message="Id cannot be left empty")
 	@Size(min=4,max=50,message="Invalid ID")
 	private String userId;

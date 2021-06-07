@@ -72,7 +72,7 @@ class FeedResponseServiceImplTest {
 	Feed f = new Feed(10,"what is JDBC",LocalDate.of(2021,03,25), LocalTime.of(4, 23, 12),"JDBC",10,d,1);
 	
 	@Test
-    @Disabled
+    //@Disabled
 	@DisplayName("Test-Save feedResponse")
 	void testSaveFeedResponse() {
 		Feedresponse input = new Feedresponse(30,"it's match", LocalDate.of(31, 05, 21), LocalTime.of(4, 23, 12),1,d,f);
@@ -87,7 +87,7 @@ class FeedResponseServiceImplTest {
 	
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@DisplayName("Test-delete FeedResponse")
 	void testDeleteFeedResponse() throws UnknownFeedResponseException {
 		
@@ -133,7 +133,7 @@ class FeedResponseServiceImplTest {
 	
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@DisplayName("Test-edit FeedResponse")
 	void testeditFeedResponse() throws UnknownFeedException {
 		Feedresponse input = new Feedresponse(30,"thats good", LocalDate.of(25, 06, 20), LocalTime.of(4, 23, 12),1,d,f);
@@ -149,7 +149,7 @@ class FeedResponseServiceImplTest {
 	
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@DisplayName("Test-Get All FeedResponses")
 	void testGetAllFeedResponses() {
 		
@@ -166,7 +166,7 @@ class FeedResponseServiceImplTest {
 	
 	
 	@Test
-	@Disabled
+	//@Disabled
 	@DisplayName("Test-like FeedResponse")
 	void testLikeFeedResponse() {
 		
