@@ -26,7 +26,7 @@ import com.app.dca.dto.FeedDTO;
 import com.app.dca.entity.Feed;
 import com.app.dca.service.IFeedService;
 import com.app.dca.service.IFeedServiceImpl;
-import com.app.dca.exception.GlobalFeedExceptionHandler;
+import com.app.dca.exception.GlobalExceptionHandler;
 import com.app.dca.exception.UnknownDeveloperException;
 import com.app.dca.exception.UnknownFeedException;
 

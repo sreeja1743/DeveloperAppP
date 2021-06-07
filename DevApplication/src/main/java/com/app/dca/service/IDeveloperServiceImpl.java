@@ -43,7 +43,7 @@ public class IDeveloperServiceImpl implements IDeveloperService{
 		if(s.isEmpty()) {
 			throw new UnknownDeveloperException(devId);
 		}
-		return repo.findById(devId).get();
+		return s.get();
 	}
 	
 	@Override

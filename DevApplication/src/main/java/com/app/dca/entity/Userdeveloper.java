@@ -15,17 +15,17 @@ public class Userdeveloper {
 	@Id
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@NotEmpty(message="Id cannot be left empty")
-	@Size(min=10,max=50,message="Invalid ID")
+	@Size(min=4,max=50,message="Invalid ID")
 	private String userId;
 	
-	@ApiModelProperty(name="password",value="Hold minimum of 7 character password")
+	@ApiModelProperty(name="password",value="Hold minimum of 6 character password")
 	@NotEmpty(message="Password cannot be empty")
 	@Size(min=6,max=9,message="Not enough length")
 	private String password;
 	
 
 	@NotEmpty(message="Role of the user cannot be empty")
-	@Size(min=5,max=15,message="Invalid role")
+	@Size(min=3,max=10,message="Invalid role")
 	private String role;
 	
 	public Userdeveloper() {

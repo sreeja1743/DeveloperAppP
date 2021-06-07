@@ -25,9 +25,7 @@ public class IFeedServiceImpl implements IFeedService{
 	@Autowired
 	private FeedRepository repo;
 	
-	@Autowired
-	private IDeveloperService devServcie;
-	
+
 	public IFeedServiceImpl() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -58,19 +56,19 @@ public class IFeedServiceImpl implements IFeedService{
 
 	@Override
 	public Feed getFeed(int feedId) throws UnknownFeedException {
-		Feed f = repo.findById(feedId).get();
-		if(f.equals(null))
-			throw new UnknownFeedException();
-		return f;
+		Optional<Feed> f = repo.findById(feedId);
+		if(f.isEmpty())
+			throw new UnknownFeedException(feedId);
+		return f.get();
 	}
 
 	@Override
 	public Feed removeFeed(int feedId) throws UnknownFeedException {
-		Feed feed = repo.findById(feedId).get();
-		if(feed.equals(null))
-			throw new UnknownFeedException();
+		Optional<Feed> feed = repo.findById(feedId);
+		if(feed.isEmpty())
+			throw new UnknownFeedException(feedId);
 	repo.deleteById(feedId);
-		return feed;
+		return feed.get();
 	}
 
 	@Override

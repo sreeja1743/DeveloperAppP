@@ -25,9 +25,7 @@ public class IFeedResponseServiceImpl implements IFeedResponseService {
 	
 	@Autowired
 	private FeedResponseRepository feedResRepo;
-	@Autowired
-	private IFeedServiceImpl fr;
-	private DeveloperRepository devRepo;
+	
   	
 	public IFeedResponseServiceImpl(FeedResponseRepository feedResRepo) {
 		// TODO Auto-generated constructor stub
@@ -55,11 +53,11 @@ public class IFeedResponseServiceImpl implements IFeedResponseService {
 
 	@Override
 	public Feedresponse removeResponse(int respId) throws UnknownFeedResponseException {
-		 Feedresponse f = feedResRepo.findById(respId).get();
-		 if(f.equals(null))
+		 Optional<Feedresponse> f = feedResRepo.findById(respId);
+		 if(f.isEmpty())
 			 throw new UnknownFeedResponseException();
 		 feedResRepo.deleteById(respId);
-		return f;
+		return f.get();
 		
 	}
 
@@ -90,7 +88,6 @@ public class IFeedResponseServiceImpl implements IFeedResponseService {
 		}
 	   
 		return feedResponse;
-		
             
 	}
 
